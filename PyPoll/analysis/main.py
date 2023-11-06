@@ -6,83 +6,86 @@ import csv
 
 csvpath = os.path.join('..', 'Resources', 'election_data.csv')
 
-with open(csvpath) as election_file:
-    csvreader = csv.reader(election_file, delimiter=",")
+#Create a file to write results into
+with open("/Users/alexhammer/Desktop/Classwork/Module_Challenges/python-challenge/PyPoll/analysis/election_text.txt", "wt") as f:
 
-    # Skip the header row
-    next(csvreader)
+    with open(csvpath) as election_file:
+        csvreader = csv.reader(election_file, delimiter=",")
 
-    # Set row counter = 0
-    row_counter = 0
+        # Skip the header row
+        next(csvreader)
 
-    # Set candidate vote counts to 0
-    charles_count = 0 
-    diana_count = 0 
-    raymon_count = 0
+        # Set row counter = 0
+        row_counter = 0
 
-    # Print document header
-    print("Election Results")
+        # Set candidate vote counts to 0
+        charles_count = 0 
+        diana_count = 0 
+        raymon_count = 0
 
-    print(" ")
+        # Print document header
+        print("Election Results", file = f)
 
-    print("----------------------------")
+        print(" ", file = f)
 
-    print(" ")
+        print("----------------------------", file = f)
 
-    # Loop through each row and add the contents to its respective list
-    for row in csvreader: 
+        print(" ", file = f)
 
-        # Add one to row_counter for every row
-        row_counter += 1
+        # Loop through each row and add the contents to its respective list
+        for row in csvreader: 
 
-        # Add one to charles count every time his name appears in row 2
-        if row[2] == "Charles Casper Stockham":
-            charles_count += 1 
-        
-        # Add one to diana count everytime her name appears in row 2
-        elif row[2] == "Diana DeGette":
-            diana_count += 1
+            # Add one to row_counter for every row
+            row_counter += 1
 
-        # Add one to raymon count every time his name appears in row 2
-        elif row[2] == "Raymon Anthony Doane":
-            raymon_count += 1
-
-         # Make a dictionary of candidates and their counts
-        count_dict = {"Charles Casper Stockham": charles_count, "Diana DeGette": diana_count, 
-                  "Raymon Anthony Doane": raymon_count}
+            # Add one to charles count every time his name appears in row 2
+            if row[2] == "Charles Casper Stockham":
+                charles_count += 1 
             
-    # Calculate the percentage of the votes Charles received
-    charles_percentage = round(((charles_count / (row_counter)) * 100 ), 3)
+            # Add one to diana count everytime her name appears in row 2
+            elif row[2] == "Diana DeGette":
+                diana_count += 1
 
-    # Calculate the percentage of the votes Diana received
-    diana_percentage = round(((diana_count / (row_counter)) * 100 ), 3)
+            # Add one to raymon count every time his name appears in row 2
+            elif row[2] == "Raymon Anthony Doane":
+                raymon_count += 1
 
-    # Calculate the percentage of the votes Raymond received
-    raymon_percentage = round(((raymon_count / (row_counter)) * 100 ), 3) 
+            # Make a dictionary of candidates and their counts
+            count_dict = {"Charles Casper Stockham": charles_count, "Diana DeGette": diana_count, 
+                    "Raymon Anthony Doane": raymon_count}
+                
+        # Calculate the percentage of the votes Charles received
+        charles_percentage = round(((charles_count / (row_counter)) * 100 ), 3)
 
-    # print the total number of votes cast (based on the length of the ID list)
-    print(f'Total Votes: {row_counter}')
+        # Calculate the percentage of the votes Diana received
+        diana_percentage = round(((diana_count / (row_counter)) * 100 ), 3)
 
-    print(" ")
+        # Calculate the percentage of the votes Raymond received
+        raymon_percentage = round(((raymon_count / (row_counter)) * 100 ), 3) 
 
-    print("----------------------------")
+        # print the total number of votes cast (based on the length of the ID list)
+        print(f'Total Votes: {row_counter}', file = f)
 
-    print(" ")
+        print(" ", file = f)
 
-    # Print the results
-    print(f"Charles Casper Stockham: {charles_percentage}% ({charles_count})")
-    print(f"Diana DeGette: {diana_percentage}% ({diana_count})")
-    print(f"Raymon Anthony Doane: {raymon_percentage}% ({raymon_count})")
+        print("----------------------------", file = f)
 
-    print(" ")
+        print(" ", file = f)
 
-    print("----------------------------")
+        # Print the results
+        print(f"Charles Casper Stockham: {charles_percentage}% ({charles_count})", file = f)
+        print(f"Diana DeGette: {diana_percentage}% ({diana_count})", file = f)
+        print(f"Raymon Anthony Doane: {raymon_percentage}% ({raymon_count})", file = f)
 
-    print(" ")
+        print(" ", file = f)
 
-    print(f"Winner: {max(count_dict, key=count_dict.get)}")
+        print("----------------------------", file = f)
 
-    print(" ")
+        print(" ", file = f)
 
-    print("----------------------------")
+        print(f"Winner: {max(count_dict, key=count_dict.get)}", file = f)
+
+        print(" ", file = f)
+
+        print("----------------------------", file = f)
 
